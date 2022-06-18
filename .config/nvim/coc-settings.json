@@ -1,0 +1,7 @@
+{
+    "java.completion.enabled" : true,
+    "java.completion.overwrite": true,
+    "java.format.enabled": true,
+    "java.saveActions.organizeImports": true,
+    "java.format.onType.enabled": true
+}
