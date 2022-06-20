@@ -105,13 +105,12 @@ neofetch
 export PATH="$HOME/.local/bin/:$PATH"
 export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
 
-alias lconf="nvim ~/.config/lvim/config.lua"
 alias zconf="nvim ~/.zshrc"
 alias zsrc="source ~/.zshrc"
 alias nconf="nvim ~/.config/nvim/init.vim"
 alias home="cd $HOME"
 alias code="cd /mnt/d/code"
-alias chtsh="curl cheat.sh/"
+
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
