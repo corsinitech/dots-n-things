@@ -45,6 +45,10 @@ Plug 'kyazdani42/nvim-tree.lua'
 " Cht.sh
 Plug 'dbeniamine/cheat.sh-vim'
 
+" Golang
+Plug 'ray-x/go.nvim'
+Plug 'ray-x/guihua.lua'
+
 call plug#end()
 
 
@@ -154,3 +158,7 @@ nnoremap <leader>r :NvimTreeRefresh<CR>
 " nvim-web-devicons
 lua require('nvim-web-devicons').setup{default=true}
 
+" Go setup stuff
+lua require('go').setup()
+autocmd BufWritePre (InsertLeave?) <buffer> lua vim.lsp.buf.formatting_sync(nil, 500)
+lua vim.api.nvim_exec([[autocmd BufWritePre *.go :silent! lua require('go.format').goimport()]], false)

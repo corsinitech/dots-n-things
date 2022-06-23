@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git golang pip python virtualenv)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -104,6 +104,8 @@ neofetch
 
 export PATH="$HOME/.local/bin/:$PATH"
 export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 alias zconf="nvim ~/.zshrc"
 alias zsrc="source ~/.zshrc"
