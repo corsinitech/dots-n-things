@@ -100,12 +100,14 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-neofetch
+macchina
 
 export PATH="$HOME/.local/bin/:$PATH"
 export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
 export GOPATH=$HOME/go
+export GOROOT="/usr/local/go"
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export PATH=$PATH:$HOME/.cargo/bin
 
 alias zconf="nvim ~/.zshrc"
 alias zsrc="source ~/.zshrc"

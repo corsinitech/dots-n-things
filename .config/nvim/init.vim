@@ -18,8 +18,9 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 call plug#begin()
 " Theme
-Plug 'gruvbox-community/gruvbox'
+Plug 'sainnhe/gruvbox-material'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'xiyaowong/nvim-transparent'
 
 " Telescope Dependencies
 Plug 'nvim-lua/plenary.nvim'
@@ -83,8 +84,11 @@ nnoremap <leader>o o<Esc>
 nnoremap <leader>O O<Esc>
 
 " Set Gruvbox as color scheme and remove background for that sweet transparency
-colorscheme gruvbox
+colorscheme gruvbox-material
 hi normal guibg=000000
+
+" Transparent background stuff
+let g:transparent_enabled = v:true
 
 " Some remaps of things...
 let mapleader = " "
