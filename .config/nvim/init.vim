@@ -19,6 +19,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin()
 " Theme
 Plug 'gruvbox-community/gruvbox'
+Plug 'nvim-lualine/lualine.nvim'
 
 " Telescope Dependencies
 Plug 'nvim-lua/plenary.nvim'
@@ -161,4 +162,9 @@ lua require('nvim-web-devicons').setup{default=true}
 " Go setup stuff
 lua require('go').setup()
 autocmd BufWritePre (InsertLeave?) <buffer> lua vim.lsp.buf.formatting_sync(nil, 500)
-lua vim.api.nvim_exec([[autocmd BufWritePre *.go :silent! lua require('go.format').goimport()]], false)
+lua vim.api.nvim_exec([[autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
+
+" LuaLine stuff
+lua << END
+require('lualine').setup()
+END
