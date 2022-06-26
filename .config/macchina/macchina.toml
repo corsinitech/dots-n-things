@@ -1,0 +1,18 @@
+long_uptime = false
+long_shell = false
+long_kernel = false
+physical_cores = false
+current_shell = false
+theme = "hydrogen"
+
+show = [
+"Host", 
+"Distribution", 
+"WindowManager", 
+"Shell", 
+"Terminal", 
+"ProcessorLoad", 
+"Memory", 
+"Battery"
+]
+

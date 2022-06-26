@@ -1,20 +1,20 @@
-" Automatic Install of Vim-Plug
+" Automatic Install of missing plugins
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-"Automatic Install of missing plugins
+" Automatic Install of Vim-Plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
 " Run PlugInstall if there are missing plugins
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \| PlugInstall --sync | source $MYVIMRC
-\| endif
+"autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+"  \| PlugInstall --sync | source $MYVIMRC
+"\| endif
 
 call plug#begin()
 " Theme
@@ -48,8 +48,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'dbeniamine/cheat.sh-vim'
 
 " Golang
-Plug 'ray-x/go.nvim'
-Plug 'ray-x/guihua.lua'
+Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries' }
 
 call plug#end()
 
@@ -77,21 +76,21 @@ set signcolumn=yes
 set colorcolumn=80
 set nocompatible
 set clipboard=
+set autowrite
 hi ColorColumn ctermbg=darkgrey guibg=darkgrey
-
-" Insert new line above/below without going into insert mode
-nnoremap <leader>o o<Esc>
-nnoremap <leader>O O<Esc>
 
 " Set Gruvbox as color scheme and remove background for that sweet transparency
 colorscheme gruvbox-material
-hi normal guibg=000000
 
 " Transparent background stuff
 let g:transparent_enabled = v:true
 
 " Some remaps of things...
 let mapleader = " "
+
+" Use tab for completions
+inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Treesitter stuff
 lua << EOF
@@ -112,10 +111,10 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fc <cmd>Telescope commands<cr>
 
 " Mappings for CoC stuff
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> cd <Plug>(coc-definition)
+nmap <silent> cy <Plug>(coc-type-definition)
+nmap <silent> ci <Plug>(coc-implementation)
+nmap <silent> cr <Plug>(coc-references)
 
 " Press K to show docs for an item
 nnoremap <silent> K :call ShowDocumentation()<CR>
@@ -133,24 +132,21 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Code Actions
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>ca  <Plug>(coc-codeaction-selected)
+nmap <leader>ca  <Plug>(coc-codeaction-selected)
 
 " Auto Fix current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Remap <C-f> and <C-b> for scrolling float windows/popups
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
-
-" Native Statusline Support
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+"" Remap <C-f> and <C-b> for scrolling float windows/popups
+"if has('nvim-0.4.0') || has('patch-8.2.0750')
+"  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+"  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+"  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+"  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+"  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+"  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+"endif
 
 " Auto Pair stuff
 lua require('nvim-autopairs').setup({map_cr = true})
@@ -164,9 +160,14 @@ nnoremap <leader>r :NvimTreeRefresh<CR>
 lua require('nvim-web-devicons').setup{default=true}
 
 " Go setup stuff
-lua require('go').setup()
-autocmd BufWritePre (InsertLeave?) <buffer> lua vim.lsp.buf.formatting_sync(nil, 500)
-lua vim.api.nvim_exec([[autocmd BufWritePre *.go :silent! lua require('go.format').goimport() ]], false)
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+autocmd FileType go nmap <leader>gb <Plug>(go-build)
+autocmd FileType go nmap <leader>gr <Plug>(go-run)
+autocmd FileType go nmap <leader>gt <Plug>(go-test)
+autocmd FileType go nmap <leader>gtc <Plug>(go-coverage-toggle)
+let g:go_list_type = "quickfix"
 
 " LuaLine stuff
 lua << END
