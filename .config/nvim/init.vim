@@ -152,7 +152,13 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 lua require('nvim-autopairs').setup({map_cr = true})
 
 " nvim-tree
-lua require'nvim-tree'.setup{}
+lua << EOF
+require'nvim-tree'.setup({
+    view = {
+        adaptive_size=true,
+        }
+})
+EOF
 nnoremap <leader>fe :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 
@@ -173,3 +179,4 @@ let g:go_list_type = "quickfix"
 lua << END
 require('lualine').setup()
 END
+

@@ -113,7 +113,7 @@ alias zconf="nvim ~/.zshrc"
 alias zsrc="source ~/.zshrc"
 alias nconf="nvim ~/.config/nvim/init.vim"
 alias home="cd $HOME"
-alias code="cd /mnt/d/code"
+alias code="cd $HOME/holocron/Code/"
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
