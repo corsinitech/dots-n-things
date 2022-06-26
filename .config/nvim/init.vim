@@ -128,8 +128,8 @@ function! ShowDocumentation()
 endfunction
 
 " Symbol Renaming
-autocmd CursorHold * silent call CocActionAsync('highlight')
-nmap <leader>rn <Plug>(coc-rename)
+" autocmd CursorHold * silent call CocActionAsync('highlight')
+" nmap <leader>rn <Plug>(coc-rename)
 
 " Code Actions
 xmap <leader>ca  <Plug>(coc-codeaction-selected)
