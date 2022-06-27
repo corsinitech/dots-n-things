@@ -1,12 +1,12 @@
 configuration {
-/*	modi: "window,run,ssh";*/
-/*	font: "JetBrainsMono Nerd Font Mono 10";*/
+/*	modi: "window,run,ssh,power_menu";*/
+/*	font: "JetBrainsMono Nerd Font Mono 12";*/
 /*	location: 0;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/
 /*	show-icons: false;*/
-/*	terminal: "rofi-sensible-terminal";*/
+/*	terminal: "alacritty";*/
 /*	ssh-client: "ssh";*/
 /*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
 /*	run-command: "{cmd}";*/
